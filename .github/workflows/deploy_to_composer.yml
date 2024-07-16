@@ -28,5 +28,5 @@ jobs:
       - name: Copy DAGs to GCS
         run: gsutil -m rsync -r dags/ gs://us-central1-webscrapperprop-9e78e2c1-bucket/dags/
 
-      - name: Copy Scripts to GCS
-        run: gsutil -m rsync -r scripts/ gs://us-central1-webscrapperprop-9e78e2c1-bucket/scripts/
+      - name: Copy Plugins to GCS
+        run: gsutil -m rsync -r plugins/ gs://us-central1-webscrapperprop-9e78e2c1-bucket/plugins/
