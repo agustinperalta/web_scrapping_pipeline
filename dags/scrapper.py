@@ -1,10 +1,4 @@
 """A DAG for web scraping pipeline."""
-import sys
-import os
-
-# Añadir el directorio 'scripts' al PYTHONPATH
-sys.path.append(os.path.join(os.path.dirname(__file__), 'scripts'))
-
 import airflow
 from airflow import DAG
 from airflow.operators.python import PythonOperator
