@@ -1,0 +1,32 @@
+name: Deploy DAGs to Composer
+
+on:
+  push:
+    branches:
+      - main  # o la rama que prefieras
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: YOUR_PROJECT_ID
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Authenticate to Google Cloud
+        run: gcloud auth activate-service-account --key-file=${{ secrets.GCP_SA_KEY }}
+
+      - name: Copy DAGs to GCS
+        run: gsutil -m rsync -r dags/ gs://YOUR_BUCKET_NAME/dags/
+
+      - name: Copy Scripts to GCS
+        run: gsutil -m rsync -r scripts/ gs://YOUR_BUCKET_NAME/scripts/
+        
+      - name: Copy Plugins to GCS
+        run: gsutil -m rsync -r plugins/ gs://YOUR_BUCKET_NAME/plugins/
